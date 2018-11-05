@@ -1,0 +1,307 @@
+{% load static %}
+{% block content %}
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/*new*/
+#wrapper .main{
+    background: #f5f5f5;
+}
+.headingtable {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 0px 20px 0px;
+    padding: 0px;
+    text-align: center;
+    color: #000;
+    text-transform: uppercase;
+}
+.date-table1 th, .zone-table th{
+background: #eee;
+    padding: 9px !important;
+    text-transform: capitalize;
+}
+.zone_tablewidth tr th, .zone_tablewidth tr td{
+    color: #292929;
+    text-align: center !important;
+}
+.zone_tablewidth tr th:first-child, .zone_tablewidth tr td:first-child{
+    min-width: auto;
+}
+.zone_tablewidth{
+    margin: 0px 0px;
+}
+#navbar-menu a {
+    float: right;
+    padding: 5px 15px;
+    background: #928f8f;
+    margin: 11px 0px;
+    color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+#navbar-menu a:hover{
+    background: #fff;
+    color: #000;
+    border-color: #000;
+}
+.tab-zonetable {
+    float: left;
+    width: 100%;
+    background: #fff;
+    padding: 20px 15px;
+    margin: 15px 0px;
+    box-shadow: 0px 0px 20px 0px #eee;
+    border: 1px solid #ddd;
+}
+
+
+
+#wrapper{
+  width: 100%;
+  overflow: hidden;
+}
+.zone_tablewidth{
+  font-size: 12px;
+  box-shadow: none;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 15%;
+  padding: 0 10px;
+}
+td{
+  text-transform: capitalize;
+  padding: 7px !important;
+}
+th{
+    width: 30px
+}
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 1px;
+  text-align: center;
+  background-color:   #FFFFFF;
+}
+h4 {
+  background-color: #1fc8db;
+  color: red;
+}
+.zone_tablewidth td{
+  padding: 7px !important;
+}
+.calender_div{
+  margin: 12px 0 -6px 0;
+}
+.calender_div input {
+    border: 1px solid #ccc;
+    background: url(/static/assets/img/calendar.png);
+    width: 24%;
+    margin-left: 8px;
+    height: 34px;
+    cursor: pointer;
+    background-size: 7%;
+    background-repeat: no-repeat;
+    background-position: 282px 5px;
+    opacity: .7;
+    color: #222;
+}
+.calender_div .form-group{
+  margin-bottom:0!important; 
+}
+
+.available-items{
+ max-height:380px!important;
+ overflow-x: hidden;
+ overflow-y: auto!important;
+}
+.available-items::-webkit-scrollbar-track
+{
+-webkit-box-shadow: inset 0 0 6px rgba(202, 92, 92, 0.3)!important;
+background-color: #F5F5F5!important;
+border-radius: 10px!important;
+}
+.available-items::-webkit-scrollbar
+{
+width: 6px!important;
+background-color: #F5F5F5!important;
+}
+.available-items::-webkit-scrollbar-thumb
+{
+border-radius: 10px!important;
+background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.72, rgb(198, 198, 199)), color-stop(0.72, rgb(198, 198, 199)), color-stop(0.72, rgb(198, 198, 199)))!important;
+}
+
+
+.chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 18px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+}
+
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.closebtn {
+  padding-left: 10px;
+  color: #888;
+  font-weight: bold;
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.closebtn:hover {
+  color: #000;
+}
+</style>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Banned Countries</title>
+  </head>
+  <body>        
+        <div class="col-md-12 nopadd">
+            <div class="tab-zonetable">
+                
+                <h1 class="headingtable">Banned Countries</h1>
+                {% for ban in banned %}
+                <div class="chip">
+                    {{ban.label}}
+                    <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+                </div>
+                {% endfor %}
+                <div class="table-responsive available-items">
+                    <table class="table table-bordered zone-table zone_tablewidth date-table1">
+                        <thead>
+                            <tr>
+                                <th> Checkbox </th>
+                                <th>
+                                    Country code
+                                </th>
+                                <th>
+                                    Country label
+                                </th>
+                                <th>
+                                    Country phone code
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+        
+        
+                            {% for country in queryset %}
+                            
+                            <tr>
+                                <td>
+                                    <input class="selection-box" type="checkbox"  name="action" {% if country.is_active %} checked {% endif %} onclick="myFunction(this)" id="{{ country.id }}" >{{ country.is_active }}
+                                </td>   
+                                <td>
+                                    <span>{{ country.code  }}</span>
+                                </td>
+                                <td>
+                                    <span>{{ country.label}}</span>
+                                </td>
+                                <td>
+                                    <span>{{country.phone}}</span>
+                                </td>
+                            </tr>                   
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+  </body>
+  {% block javascript %}
+  <script>
+    function myFunction(event) {
+        var checkBox = document.getElementById(event.id);
+        var text = document.getElementById(checkBox.checked);
+        debugger
+        $.ajax({
+        url: '{% url "ajax" %}',
+        data: {
+          'id': username
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+        });
+        if (checkBox.checked == true){
+            text.style.display = "block";
+        } else {
+            text.style.display = "none";
+        }
+    }
+    $("#myFunction").click(function () {
+        debugger
+      var username = $(this).val();
+
+      $.ajax({
+        url: '{% url "ajax" %}',
+        data: {
+          'id': username
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+      });
+
+    });
+  </script>
+{% endblock %}
+</html>
+{%endblock%}
